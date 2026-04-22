@@ -44,4 +44,4 @@ You an also just drop a skill file into your agent's skills directory (e.g., `~/
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Inspired by [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) and [https://github.com/TheMattBerman/meta-ads-kit]
+MIT — see [LICENSE](LICENSE). Inspired by [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) and https://github.com/TheMattBerman/meta-ads-kit 
