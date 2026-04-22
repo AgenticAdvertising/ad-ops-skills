@@ -4,7 +4,7 @@ Open-source practical AI‑agent Ad Ops skills for running paid ad accounts with
 
 Built for performance marketers/agencies who want to accelerate their Ad Ops loop with AI. Compatible with [Adside.ai](https://adside.ai), ChatGPT, Claude Code, the Claude Agent SDK, and any agent runtime that supports Agent Skills.
 
-## Skills (15)
+## Skills (16)
 
 ### Briefings — start here
 
@@ -30,6 +30,7 @@ Built for performance marketers/agencies who want to accelerate their Ad Ops loo
 | 🩸 [bleeders-winners](bleeders-winners.md)     | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.       |
 | 📉 [fatigue-detector](fatigue-detector.md)     | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                  |
 | 👥 [audience-health](audience-health.md)       | Ad‑set‑level saturation, frequency, and overlap — tells you when to refresh, expand, split, or retire an audience.        |
+| 🪝 [hook-architect](hook-architect.md)         | Isolates the first 3 seconds — scores Hook Rate vs. account ±1σ, cross‑checks Hold Rate, tags archetypes, outputs iteration briefs. |
 | 🎨 [creative-brief](creative-brief.md)         | Mines winning angles from top performers and produces 3 visual concepts (format, mood, key elements) to brief a designer. |
 | ✍️ [copy-rotation](copy-rotation.md)           | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.    |
 
