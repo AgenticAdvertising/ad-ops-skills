@@ -30,15 +30,15 @@ Each skill is a single markdown file with frontmatter (`name`, `description`, `m
 
 All these skills are directly available in Adside.ai within the Skills section under Settings:
 
-<img width="1822" height="1109" alt="skills-ad-side" src="https://github.com/user-attachments/assets/1c402fe2-3a4d-42b0-831c-4acb181f4855" />
+<img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 29 45" src="https://github.com/user-attachments/assets/500c5402-41ff-456c-a0c0-cf8be255cdb6" />
 
 Then you can invoke them with the /command in the Chat:
 
-<img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 11 39" src="https://github.com/user-attachments/assets/96158d90-4885-4205-bdb3-16f5a78ac603" />
+<img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 29 58" src="https://github.com/user-attachments/assets/167a7f38-00b3-4161-8208-68ebdbba292c" />
 
 And voilà:
 
-
+<img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 31 00" src="https://github.com/user-attachments/assets/8f82df96-8371-4d0c-9172-38c4b9f16655" />
 
 You an also just drop a skill file into your agent's skills directory (e.g., `~/.claude/skills/` for Claude Code) or reference the raw file from this repo. The agent will pick it up on next invocation.
 
