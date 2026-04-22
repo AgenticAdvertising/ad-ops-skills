@@ -28,7 +28,11 @@ Each skill is a single markdown file with frontmatter (`name`, `description`, `m
 
 ## Usage
 
-Drop a skill file into your agent's skills directory (e.g., `~/.claude/skills/` for Claude Code) or reference the raw file from this repo. The agent will pick it up on next invocation.
+All these skills are directly available in Adside.ai within the Skills section under Settings:
+
+<img width="1822" height="1109" alt="skills-ad-side" src="https://github.com/user-attachments/assets/1c402fe2-3a4d-42b0-831c-4acb181f4855" />
+
+You an also just drop a skill file into your agent's skills directory (e.g., `~/.claude/skills/` for Claude Code) or reference the raw file from this repo. The agent will pick it up on next invocation.
 
 ## License
 
