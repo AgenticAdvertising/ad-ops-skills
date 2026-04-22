@@ -4,13 +4,14 @@ Open-source practical AI‑agent Ad Ops skills for running paid ad accounts with
 
 Built for performance marketers/agencies who want to accelerate their Ad Ops loop with AI. Compatible with [Adside.ai](https://adside.ai), ChatGPT, Claude Code, the Claude Agent SDK, and any agent runtime that supports Agent Skills.
 
-## Skills (12)
+## Skills (15)
 
-### Daily Loop — start here
+### Briefings — start here
 
-| Skill                                | What it does                                                                                                                                       |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🗞 [daily-brief](daily-brief.md)     | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
+| Skill                                           | What it does                                                                                                                                       |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🗞 [daily-brief](daily-brief.md)                | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
+| 📊 [weekly-exec-summary](weekly-exec-summary.md) | Monday client‑meeting roll‑up — narrative synthesis written for a stakeholder, not the operator. Agency‑facing counterpart to `daily-brief`.      |
 
 ### Performance & Budget
 
@@ -29,7 +30,14 @@ Built for performance marketers/agencies who want to accelerate their Ad Ops loo
 | 🩸 [bleeders-winners](bleeders-winners.md)     | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.       |
 | 📉 [fatigue-detector](fatigue-detector.md)     | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                  |
 | 👥 [audience-health](audience-health.md)       | Ad‑set‑level saturation, frequency, and overlap — tells you when to refresh, expand, split, or retire an audience.        |
+| 🎨 [creative-brief](creative-brief.md)         | Mines winning angles from top performers and produces 3 visual concepts (format, mood, key elements) to brief a designer. |
 | ✍️ [copy-rotation](copy-rotation.md)           | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.    |
+
+### Market Intelligence
+
+| Skill                                                 | What it does                                                                                                                       |
+| :---------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| 🔭 [competitor-ads-watch](competitor-ads-watch.md)    | Weekly scan of Meta Ad Library for tracked competitors — surfaces new angles, formats, long‑running winners, and gaps vs. your mix. |
 
 ### Launch & Audit
 
