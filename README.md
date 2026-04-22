@@ -2,7 +2,7 @@
 
 Practical AI‑agent skills for running paid ad accounts — diagnostics, monitoring, and creative generation for Meta, Google, LinkedIn, and other channels.
 
-Built for performance marketers/agencies who want to accelerate their Ad Ops loop with AI. Compatible with [Adside.ai[(https://adside.ai)], ChatGPT, Claude Code, the Claude Agent SDK, and any agent runtime that supports Agent Skills.
+Built for performance marketers/agencies who want to accelerate their Ad Ops loop with AI. Compatible with [Adside.ai](https://adside.ai), ChatGPT, Claude Code, the Claude Agent SDK, and any agent runtime that supports Agent Skills.
 
 ## Skills (8)
 
