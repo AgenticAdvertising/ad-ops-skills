@@ -8,26 +8,26 @@ Built for media buyers and agencies who want an AI assistant that can answer *"h
 
 ### Daily Loop — start here
 
-| Skill                             | What it does                                                                                                                                       |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [daily-brief](daily-brief.md)     | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
+| Skill                                | What it does                                                                                                                                       |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🗞 [daily-brief](daily-brief.md)     | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
 
 ### Performance & Budget
 
-| Skill                                  | What it does                                                                                                                           |
-| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| [am-i-on-track](am-i-on-track.md)      | Intraday pacing: compares today's spend to expected‑at‑this‑hour, projects EOD, flags over/under‑pacing.                               |
-| [past-7days](past-7days.md)            | Weekly campaign‑level performance with WoW deltas and the top ad (name + copy) driving each campaign.                                  |
-| [whats-running](whats-running.md)      | Active‑campaign inventory with daily budgets, flagging leaks: expired tests, past‑end‑date launches, zombies.                          |
-| [budget-shifter](budget-shifter.md)    | Reallocates budget across campaigns based on ROAS/CPA — finds donors and receivers, with guardrails against learning‑phase resets.     |
+| Skill                                     | What it does                                                                                                                           |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| ⏱️ [am-i-on-track](am-i-on-track.md)      | Intraday pacing: compares today's spend to expected‑at‑this‑hour, projects EOD, flags over/under‑pacing.                               |
+| 📅 [past-7days](past-7days.md)            | Weekly campaign‑level performance with WoW deltas and the top ad (name + copy) driving each campaign.                                  |
+| 🏃 [whats-running](whats-running.md)      | Active‑campaign inventory with daily budgets, flagging leaks: expired tests, past‑end‑date launches, zombies.                          |
+| 💰 [budget-shifter](budget-shifter.md)    | Reallocates budget across campaigns based on ROAS/CPA — finds donors and receivers, with guardrails against learning‑phase resets.     |
 
 ### Creative Optimization
 
-| Skill                                       | What it does                                                                                                              |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------ |
-| [bleeders-winners](bleeders-winners.md)     | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.       |
-| [fatigue-detector](fatigue-detector.md)     | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                  |
-| [copy-rotation](copy-rotation.md)           | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.    |
+| Skill                                          | What it does                                                                                                              |
+| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
+| 🩸 [bleeders-winners](bleeders-winners.md)     | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.       |
+| 📉 [fatigue-detector](fatigue-detector.md)     | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                  |
+| ✍️ [copy-rotation](copy-rotation.md)           | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.    |
 
 ## Format
 
