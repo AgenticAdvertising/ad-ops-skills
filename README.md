@@ -4,7 +4,7 @@ Open-source practical AI‑agent Ad Ops skills for running paid ad accounts with
 
 Built for performance marketers/agencies who want to accelerate their Ad Ops loop with AI. Compatible with [Adside.ai](https://adside.ai), ChatGPT, Claude Code, the Claude Agent SDK, and any agent runtime that supports Agent Skills.
 
-## Skills (8)
+## Skills (11)
 
 ### Daily Loop — start here
 
@@ -20,6 +20,7 @@ Built for performance marketers/agencies who want to accelerate their Ad Ops loo
 | 📅 [past-7days](past-7days.md)            | Weekly campaign‑level performance with WoW deltas and the top ad (name + copy) driving each campaign.                                  |
 | 🏃 [whats-running](whats-running.md)      | Active‑campaign inventory with daily budgets, flagging leaks: expired tests, past‑end‑date launches, zombies.                          |
 | 💰 [budget-shifter](budget-shifter.md)    | Reallocates budget across campaigns based on ROAS/CPA — finds donors and receivers, with guardrails against learning‑phase resets.     |
+| 🚨 [anomaly-watch](anomaly-watch.md)      | Off‑cadence alerts: CPM spikes, conversion outages, delivery freezes, spend runaway. Fires between scheduled reports.                  |
 
 ### Creative Optimization
 
@@ -27,7 +28,14 @@ Built for performance marketers/agencies who want to accelerate their Ad Ops loo
 | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | 🩸 [bleeders-winners](bleeders-winners.md)     | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.       |
 | 📉 [fatigue-detector](fatigue-detector.md)     | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                  |
+| 👥 [audience-health](audience-health.md)       | Ad‑set‑level saturation, frequency, and overlap — tells you when to refresh, expand, split, or retire an audience.        |
 | ✍️ [copy-rotation](copy-rotation.md)           | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.    |
+
+### Launch & Audit
+
+| Skill                                          | What it does                                                                                                              |
+| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
+| 📋 [ad-qa-checklist](ad-qa-checklist.md)       | Pre‑launch preflight: tracking (UTMs, pixel, events), naming, placements, creative specs, landing‑page message match.     |
 
 ## Format
 
