@@ -10,7 +10,7 @@ Built for media buyers and agencies who want an AI assistant that can answer *"h
 
 | Skill                             | What it does                                                                                                                                       |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [daily-brief](daily-brief.md)     | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, and `fatigue-detector` into a single prioritized brief.           |
+| [daily-brief](daily-brief.md)     | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
 
 ### Performance & Budget
 
