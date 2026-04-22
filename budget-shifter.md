@@ -1,8 +1,8 @@
 ---
 name: budget-shifter
-description: "Reallocates budget across campaigns and ad sets based on ROAS and CPA — finds donors (underperformers with budget to spare) and receivers (scalable winners), with guardrails against learning‑phase resets."
+description: "Reallocates budget across campaigns and ad sets based on ROAS and CPA — finds donors (underperformers with budget to spare) and receivers (scalable winners), with guardrails against learning‑phase resets. Also forecasts what‑if scenarios (spend ±X%, campaign scale/pause) grounded in the account's actual history, never generic projections."
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 ## 1. Purpose
@@ -58,3 +58,53 @@ A campaign is a **receiver** only if it meets **all** of these:
 > | **Spring Sale Carousel** → **Summer Launch — Traffic**  | $80/day  | Donor: fatigued (freq 4.1, CTR 0.8%, spending 14% of account). Receiver: CPC 42% of account avg, freq 2.1, spending 93% of budget.   |
 >
 > **Action:** apply all 3 in one batch, then re‑check in 48h before the next shift.
+
+## 6. Scenario Forecasts
+
+Beyond individual shift proposals, the skill answers **what‑if** questions grounded in the **account's actual history** — never generic projections. Every number in a forecast must be derivable from this account's data.
+
+### 6.1 Supported Scenarios
+
+| Scenario                       | Typical Question                                                          |
+| :----------------------------- | :------------------------------------------------------------------------ |
+| **Total spend ±X%**            | *"What happens if we spend 30% more next week?"*                          |
+| **Single‑campaign scale**      | *"What if we doubled Retargeting's budget?"*                              |
+| **New campaign launch**        | *"If we add a $200/day campaign, where does it bite into existing performance?"* |
+| **Campaign pause**             | *"If we pause Summer Launch, where does its spend need to go?"*           |
+| **Target‑driven**              | *"What spend gets us to $50K revenue/week at ≥ 2.0× ROAS?"*               |
+
+### 6.2 Data Required Before Forecasting
+
+Pull these from the account — if any are missing for a given campaign, skip or mark that campaign as 🔴 Unreliable in the output:
+
+- **Per‑campaign spend → outcome curve** (14‑day rolling): observed ROAS and CPA at each realized daily spend tier.
+- **Past scaling response**: actual % change in ROAS/CPM when that campaign's daily budget moved ±20% in the trailing 90 days.
+- **Saturation state** from [audience-health](audience-health.md): does the campaign have headroom, or is it already Exhausted?
+- **Account auction context**: current CPM vs. 30‑day avg (rising CPM ⇒ less elasticity at higher spend).
+
+### 6.3 Forecast Rules
+
+- **Per‑campaign elasticity** — never blend across campaigns. A Winner with headroom and a saturated brand campaign respond very differently to the same % increase.
+- **Bound to history** — cap any projection at the historical extreme observed. Don't extrapolate past what this account has actually done.
+- **Confidence tiers**:
+
+| Tier                    | Criteria                                                                                   |
+| :---------------------- | :----------------------------------------------------------------------------------------- |
+| 🟢 **High**             | ≥ 3 past budget changes to sample, similar CPM regime, current saturation Healthy/Refreshing |
+| 🟡 **Low**              | 1–2 past samples, or CPM regime differs > 20% from sample window                            |
+| 🔴 **Unreliable**       | No relevant history (new campaign, no prior budget changes) — show range only, no point estimate |
+
+### 6.4 Operational Output: "What if we spend 30% more?"
+
+> **Scenario:** account daily spend **$4,000 → $5,200** (+30%) · horizon: next 7 days
+>
+> | Campaign                          | Current  | Proposed   | Projected ROAS       | Projected CPA         | Conf. | Notes                                                                 |
+> | :-------------------------------- | :------- | :--------- | :------------------- | :-------------------- | :---- | :-------------------------------------------------------------------- |
+> | **Retargeting — Conversions**     | $1,400   | **$1,820** | 3.1× (was 3.4×, −0.3)| $19 (was $18.50, +$0.50) | 🟢    | Last 2 +20% moves held ROAS within −5%. Freq 1.8 — still headroom.    |
+> | **Summer Launch — Traffic**       | $1,050   | **$1,260** | — (traffic objective)| CTR flat              | 🟢    | CPM only +6% on last +25% move. Freq 2.1.                             |
+> | **Evergreen Prospecting**         | $320     | **$700**   | 1.4× (was 2.0×, −30%)| $42 (was $30, +$12)   | 🟡    | Only 2 prior budget changes. Likely hits saturation at this tier.     |
+> | **Founder UGC Hook**              | $280     | **$420**   | 2.8× (was 2.9×)      | $15 (was $15.20)      | 🟢    | Winner: 17 conv / 7d, freq 1.8, past learning phase.                  |
+>
+> **Aggregate forecast:** account ROAS **2.4× → 2.2×** (−8%) · CPA **$24 → $26** (+8%) · **+21 conversions/day**.
+>
+> **Caveat:** Evergreen Prospecting's elasticity sample is thin (🟡). Consider redirecting its +$380 to Retargeting + Founder UGC Hook (both 🟢) — projected aggregate ROAS with that redirect: **2.3×** (vs. 2.2× baseline).
