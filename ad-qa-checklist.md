@@ -1,8 +1,8 @@
 ---
 name: ad-qa-checklist
-description: "Pre‑launch preflight for new ads and campaigns — verifies tracking (UTMs, pixel, events), naming conventions, placement coverage, creative specs, and landing‑page message match. Catches preventable mistakes before they cost money."
+description: "Pre‑launch preflight for new ads and campaigns — verifies tracking (UTMs, pixel, events), naming conventions, placement coverage, creative specs, and landing‑page message match. Also produces a required UTM inventory showing each ad's current vs. proposed destination URL so the reviewer can copy‑paste fixes. Catches preventable mistakes before they cost money."
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 ## 1. Purpose
@@ -94,3 +94,48 @@ Overall status is the highest severity present: any 🔴 = BLOCK, any 🟡 = PRO
 > - 🟡 Message match: ad promises *"50% off"* — LP headline reads *"Welcome"*, no offer reinforced
 >
 > **Action:** fix the 2 blockers (pixel, LP URL) before launch. Warnings have a 24h SLA after go‑live.
+
+## 5. UTM Parameter Inventory (Required)
+
+Beyond the pass/fail checks in §2, every preflight run **must** produce a UTM inventory listing every ad in the batch with its **current destination URL** and a **proposed URL** with standardized UTMs. This is a required transformation — the reviewer should be able to copy each Proposed URL straight back into the ad set.
+
+### 5.1 Required UTM Parameters
+
+| Parameter       | Value source                                                          | Required |
+| :-------------- | :-------------------------------------------------------------------- | :------- |
+| `utm_source`    | Ad platform — `meta` · `google` · `linkedin` · `tiktok`               | ✅       |
+| `utm_medium`    | Channel type — `paid_social` · `paid_search` · `display`              | ✅       |
+| `utm_campaign`  | Campaign name, slugified (lowercase, hyphens)                         | ✅       |
+| `utm_content`   | Per‑ad identifier — ad ID or ad‑name slug. **Must be unique per ad.** | ✅       |
+| `utm_term`      | Audience or keyword (required for Search, optional for Social)         | ⚪       |
+
+### 5.2 URL Transformation — required table
+
+For **every ad** in the batch:
+
+| Column           | Content                                                                                                 |
+| :--------------- | :------------------------------------------------------------------------------------------------------ |
+| **Ad**           | Ad ID · Name                                                                                            |
+| **Current URL**  | Destination URL currently set on the ad (may be missing UTMs or have wrong values)                      |
+| **Proposed URL** | Same destination + all required UTMs appended (existing UTMs replaced if misaligned)                    |
+| **Delta**        | What changed — `+all UTMs` · `utm_campaign fixed` · `utm_content collision resolved` · `no change`     |
+
+### 5.3 Transformation Rules
+
+- **Preserve non‑UTM query params** (e.g. `ref=`, `plan=`) — append UTMs after them; don't strip them.
+- **Resolve collisions** — if two ads would end up with the same `utm_content`, append a suffix (`-v2`, `-v3`) and note it in Delta.
+- **Flag broken bases** — if the current URL returns 404/5xx, still produce the Proposed URL for when the LP is fixed, and cross‑reference the 🔴 Block in the Landing‑Page check.
+- **Never strip `fbclid` / `gclid`** templates — platform‑injected at click time.
+- **Slug conventions** — lowercase · ASCII only · spaces → `-` · strip punctuation · collapse repeat hyphens.
+
+### 5.4 Example
+
+> **UTM Inventory — `Summer Launch — Traffic` · 3 ads**
+>
+> | Ad                             | Current URL                                      | Proposed URL                                                                                                                             | Delta                                                   |
+> | :----------------------------- | :----------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ |
+> | `AD_554` Notes App Hero        | `https://acme.com/summer-offer`                  | `https://acme.com/summer-offer?utm_source=meta&utm_medium=paid_social&utm_campaign=summer-launch&utm_content=ad-554-notes-app-hero`      | +all UTMs (were missing)                                |
+> | `AD_388` Founder UGC Hook      | `https://acme.com/summer-offer?utm_content=ugc`  | `https://acme.com/summer-offer?utm_source=meta&utm_medium=paid_social&utm_campaign=summer-launch&utm_content=ad-388-founder-ugc-hook`    | +source / medium / campaign · `utm_content` specialized |
+> | `AD_412` Founder UGC Hook v2   | `https://acme.com/summer-offer?utm_content=ugc`  | `https://acme.com/summer-offer?utm_source=meta&utm_medium=paid_social&utm_campaign=summer-launch&utm_content=ad-412-founder-ugc-hook-v2` | collision resolved — was duplicating `AD_388`'s value   |
+>
+> **Action:** copy each Proposed URL into its ad's destination field before launch.
