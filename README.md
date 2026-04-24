@@ -55,11 +55,15 @@ Each skill is a single markdown file with frontmatter (`name`, `description`, `m
 
 ## Usage
 
-All these skills are directly available in [Adside.ai](https://adside.ai), within the Skills section under Settings:
+All these skills can be used by all AI models and are directly available in [Adside.ai](https://adside.ai), within the Skills section under Settings:
 
 <img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 29 45" src="https://github.com/user-attachments/assets/500c5402-41ff-456c-a0c0-cf8be255cdb6" />
 
-Then you can invoke them with the /command in the Chat:
+Once imported into Claude you can invoke them with the /command in the chat:
+
+<img width="1014" height="521" alt="Screenshot 2026-04-24 at 09 11 07" src="https://github.com/user-attachments/assets/810793f2-f2af-44c6-a867-72337158a203" />
+
+Same in Adside.ai:
 
 <img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 29 58" src="https://github.com/user-attachments/assets/167a7f38-00b3-4161-8208-68ebdbba292c" />
 
