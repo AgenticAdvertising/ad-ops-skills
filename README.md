@@ -8,46 +8,46 @@ Built for performance marketers/agencies who want to accelerate their Ad Ops loo
 
 ### Briefings — start here
 
-| Skill                                           | What it does                                                                                                                                       |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🗞 [daily-brief](daily-brief.md)                | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
-| 📊 [weekly-exec-summary](weekly-exec-summary.md) | Monday client‑meeting roll‑up — narrative synthesis written for a stakeholder, not the operator. Agency‑facing counterpart to `daily-brief`.      |
+| Skill                                            | What it does                                                                                                                                                                                       |
+| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🗞 [daily-brief](daily-brief.md)                 | Morning digest that chains `am-i-on-track`, `whats-running`, `bleeders-winners`, `fatigue-detector`, and `copy-rotation` into a prioritized brief with replacement copy for every paused creative. |
+| 📊 [weekly-exec-summary](weekly-exec-summary.md) | Monday client‑meeting roll‑up — narrative synthesis written for a stakeholder, not the operator. Agency‑facing counterpart to `daily-brief`.                                                       |
 
 ### Performance & Budget
 
-| Skill                                     | What it does                                                                                                                           |
-| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| ⏱️ [am-i-on-track](am-i-on-track.md)      | Intraday pacing: compares today's spend to expected‑at‑this‑hour, projects EOD, flags over/under‑pacing.                               |
-| 📅 [past-7days](past-7days.md)            | Weekly campaign‑level performance with WoW deltas and the top ad (name + copy) driving each campaign.                                  |
-| 🏃 [whats-running](whats-running.md)      | Active‑campaign inventory with daily budgets, flagging leaks: expired tests, past‑end‑date launches, zombies.                          |
-| 💰 [budget-shifter](budget-shifter.md)    | Reallocates budget across campaigns based on ROAS/CPA — finds donors and receivers, with guardrails against learning‑phase resets.     |
-| 🚨 [anomaly-watch](anomaly-watch.md)      | Off‑cadence alerts: CPM spikes, conversion outages, delivery freezes, spend runaway. Fires between scheduled reports.                  |
+| Skill                                  | What it does                                                                                                                       |
+| :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| ⏱️ [am-i-on-track](am-i-on-track.md)   | Intraday pacing: compares today's spend to expected‑at‑this‑hour, projects EOD, flags over/under‑pacing.                           |
+| 📅 [past-7days](past-7days.md)         | Weekly campaign‑level performance with WoW deltas and the top ad (name + copy) driving each campaign.                              |
+| 🏃 [whats-running](whats-running.md)   | Active‑campaign inventory with daily budgets, flagging leaks: expired tests, past‑end‑date launches, zombies.                      |
+| 💰 [budget-shifter](budget-shifter.md) | Reallocates budget across campaigns based on ROAS/CPA — finds donors and receivers, with guardrails against learning‑phase resets. |
+| 🚨 [anomaly-watch](anomaly-watch.md)   | Off‑cadence alerts: CPM spikes, conversion outages, delivery freezes, spend runaway. Fires between scheduled reports.              |
 
 ### Creative Optimization
 
-| Skill                                          | What it does                                                                                                              |
-| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| 🩸 [bleeders-winners](bleeders-winners.md)     | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.       |
-| 📉 [fatigue-detector](fatigue-detector.md)     | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                  |
-| 👥 [audience-health](audience-health.md)       | Ad‑set‑level saturation, frequency, and overlap — tells you when to refresh, expand, split, or retire an audience.        |
-| 🪝 [hook-architect](hook-architect.md)         | Isolates the first 3 seconds — scores Hook Rate vs. account ±1σ, cross‑checks Hold Rate, tags archetypes, outputs iteration briefs. |
-| 🎨 [creative-brief](creative-brief.md)         | Mines winning angles from top performers and produces 3 visual concepts (format, mood, key elements) to brief a designer. |
-| ✍️ [copy-rotation](copy-rotation.md)           | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.    |
+| Skill                                      | What it does                                                                                                                        |
+| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| 🩸 [bleeders-winners](bleeders-winners.md) | Identifies ads to stop (Bleeders) and ads to scale (Winners) with headline/body/CTA context and an action workflow.                 |
+| 📉 [fatigue-detector](fatigue-detector.md) | Early warning for creative decay using frequency creep, CPM inflation, CTR erosion, and sentiment shift.                            |
+| 👥 [audience-health](audience-health.md)   | Ad‑set‑level saturation, frequency, and overlap — tells you when to refresh, expand, split, or retire an audience.                  |
+| 🪝 [hook-architect](hook-architect.md)     | Isolates the first 3 seconds — scores Hook Rate vs. account ±1σ, cross‑checks Hold Rate, tags archetypes, outputs iteration briefs. |
+| 🎨 [creative-brief](creative-brief.md)     | Mines winning angles from top performers and produces 3 visual concepts (format, mood, key elements) to brief a designer.           |
+| ✍️ [copy-rotation](copy-rotation.md)       | Generates image‑matched Meta ad copy using the Four Horsemen psychology framework, matched to the account's signature.              |
 
 ### Market Intelligence
 
-| Skill                                                 | What it does                                                                                                                       |
-| :---------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| 🔭 [competitor-ads-watch](competitor-ads-watch.md)    | Weekly scan of Meta Ad Library for tracked competitors — surfaces new angles, formats, long‑running winners, and gaps vs. your mix. |
-| 👂 [social-listening](social-listening.md)            | Brand sentiment across Reddit, X, and G2 — clusters themes, extracts verbatim quotes, and translates each into a paid‑ads move (hook, preempt, versus angle, pause). |
+| Skill                                              | What it does                                                                                                                                                         |
+| :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔭 [competitor-ads-watch](competitor-ads-watch.md) | Weekly scan of Meta Ad Library for tracked competitors — surfaces new angles, formats, long‑running winners, and gaps vs. your mix.                                  |
+| 👂 [social-listening](social-listening.md)         | Brand sentiment across Reddit, X, and G2 — clusters themes, extracts verbatim quotes, and translates each into a paid‑ads move (hook, preempt, versus angle, pause). |
 
 ### Launch & Audit
 
-| Skill                                          | What it does                                                                                                              |
-| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| 📋 [ad-qa-checklist](ad-qa-checklist.md)       | Pre‑launch preflight: tracking (UTMs, pixel, events), naming, placements, creative specs, landing‑page message match.     |
-| 🏷 [asset-rename](asset-rename.md)             | Audits campaign/ad‑set/ad names against the Foundr three‑level convention and proposes standardized renames with confidence scores. |
-| 📦 [bulk-asset-rename](bulk-asset-rename.md)   | Batch‑renames creative asset files (Drive, etc.) per a configurable template — inspects visual content + metadata to produce consistent filenames. |
+| Skill                                                            | What it does                                                                                                                                       |
+| :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 📋 [ad-qa-checklist](ad-qa-checklist.md)                         | Pre‑launch preflight: tracking (UTMs, pixel, events), naming, placements, creative specs, landing‑page message match.                              |
+| 🏷 [campaigns-adsets-ads-rename](campaigns-adsets-ads-rename.md) | Audits campaign/ad‑set/ad names against the Foundr three‑level convention and proposes standardized renames with confidence scores.                |
+| 📦 [bulk-asset-rename](bulk-asset-rename.md)                     | Batch‑renames creative asset files (Drive, etc.) per a configurable template — inspects visual content + metadata to produce consistent filenames. |
 
 ## Format
 
@@ -77,4 +77,4 @@ In Adside.ai we provide a better experience to visualize the Ads directly in the
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Inspired by [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) and [TheMattBerman/meta-ads-kit](https://github.com/TheMattBerman/meta-ads-kit) 
+MIT — see [LICENSE](LICENSE). Inspired by [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) and [TheMattBerman/meta-ads-kit](https://github.com/TheMattBerman/meta-ads-kit)
