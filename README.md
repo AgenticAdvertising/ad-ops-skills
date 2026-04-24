@@ -69,7 +69,9 @@ Same in Adside.ai:
 
 And voilà:
 
-<img width="1047" height="1467" alt="Screenshot 2026-04-24 at 09 14 00" src="https://github.com/user-attachments/assets/b0ced54c-58c6-4051-be6c-d0d451b34b16" />
+<img width="972" height="1105" alt="Screenshot 2026-04-24 at 09 15 11" src="https://github.com/user-attachments/assets/01952102-9bb8-445e-acb9-b3717d654dc8" />
+
+In Adside.ai we provide a better experience to visualize the Ads directly in the table:
 
 <img width="1822" height="1109" alt="Screenshot 2026-04-22 at 09 31 00" src="https://github.com/user-attachments/assets/8f82df96-8371-4d0c-9172-38c4b9f16655" />
 
