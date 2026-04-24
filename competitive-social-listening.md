@@ -1,15 +1,22 @@
 ---
 name: competitive-social-listening
-description: "Brand sentiment analysis targeted at a COMPETITOR brand — scans Reddit, X, and G2 for complaints, switcher signals, feature gaps, price backlash, and comparisons, then translates each into a competitive paid‑ads move (wedge hooks, switcher creative, audience targeting, messaging angles)."
+description: "For challenger brands running paid ads against an incumbent — listens to what the market says about the COMPETITOR on Reddit, X, and G2, and turns their complaints, switcher threads, feature gaps, and price backlash into wedge hooks, switcher creatives, and audience targeting you can deploy this week."
 metadata:
   version: 1.0.0
 ---
 
 ## 1. Purpose
 
-The inverse of [social-listening](social-listening.md): that skill watches what the market says about **your** brand so you can fix your ads. This one watches what the market says about a **competitor** so you can **attack** theirs.
+This skill is the **mirror** of [social-listening](social-listening.md) — same three sources (Reddit, X, G2), flipped lens:
 
-Every complaint, switcher, feature gap, or price gripe aired publicly is a wedge you can lift directly into a creative — in their own customers' language — and target at people shaped like them.
+|                  | [social-listening](social-listening.md)                          | **competitive-social-listening** (this skill)                         |
+| :--------------- | :--------------------------------------------------------------- | :-------------------------------------------------------------------- |
+| **Subject**      | **Your** brand                                                   | A **competitor's** brand                                              |
+| **Used by**      | The brand itself                                                 | A challenger running ads *against* that competitor                    |
+| **Goal**         | Fix / defend your ads                                            | **Attack / exploit** the competitor                                   |
+| **Typical move** | Preempt objections, lift praise into your hooks                  | Lift competitor complaints into wedge hooks, target their switchers   |
+
+Every complaint, switcher, feature gap, or price gripe a competitor's customer airs publicly is a wedge you can lift directly into a creative — in the competitor's own customers' language — and target at people shaped like them.
 
 Run **weekly**, or on demand before briefing a competitor‑targeted campaign.
 
