@@ -1,0 +1,7 @@
+# CODEOWNERS — see https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Listed owners are automatically requested for review on PRs that touch the
+# matching paths. With branch protection's "Require review from Code Owners"
+# enabled on main, these PRs cannot merge without an approval from one of them.
+
+/.github/workflows/ @guillaume-miara @thibaultimbert
