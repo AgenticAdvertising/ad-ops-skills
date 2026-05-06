@@ -1,0 +1,27 @@
+name: Sync to Adside
+on:
+  push:
+    branches: [main]
+    paths: ["*.md"]
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Adside sync
+        env:
+          ADSIDE_SYNC_URL: ${{ vars.ADSIDE_SYNC_URL }}
+          ADSIDE_SYNC_TOKEN: ${{ secrets.ADSIDE_SYNC_TOKEN }}
+        run: |
+          if [ -z "$ADSIDE_SYNC_URL" ] || [ -z "$ADSIDE_SYNC_TOKEN" ]; then
+            echo "::error::ADSIDE_SYNC_URL repo variable or ADSIDE_SYNC_TOKEN secret not configured"
+            exit 1
+          fi
+          curl -X POST "$ADSIDE_SYNC_URL" \
+            -H "Authorization: Bearer $ADSIDE_SYNC_TOKEN" \
+            -H "Content-Type: application/json" \
+            --fail-with-body \
+            --silent --show-error
