@@ -2,7 +2,7 @@
 name: copy-rotation
 description: "Generates Meta ad copy matched to the visual and to the account's proven winners — each variant hits a different psychological angle, reinforces the image instead of repeating it, and respects proven length/opener/closer specs."
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 ---
 
 ## 0. Source Ad(s) — anchor before generating
@@ -13,10 +13,11 @@ Copy rotation always generates variants for ONE OR MORE specific source ads (the
    - An ad the user named (e.g. `/copy-rotation @AdX`)
    - The fatigued ads surfaced by a recent `/fatigue-detector` run
    - A specific winner from §2's audit
-2. **Look up each source ad's actual creative image** — the visual the ad is currently running — and stash it with that ad before writing any copy.
-3. **Bind variants to source ad**: every variant in §6 inherits the SAME source ad's image — the whole point of rotation is to swap copy on a known visual. When you render the variants for the user, every preview MUST display the source ad's real image. Empty image placeholders read as a broken feature.
+2. **Cap the pack at 1–3 source ads** — pick the highest-priority ones (most fatigued, highest spend, the ones the user explicitly named). Resist the urge to fetch and process every ad in the account; each additional source ad multiplies the upstream lookups and routinely pushes the chat turn past the request budget.
+3. **Look up each source ad's actual creative image** — the visual the ad is currently running — and stash it with that ad before writing any copy.
+4. **Bind variants to source ad**: every variant in §6 inherits the SAME source ad's image — the whole point of rotation is to swap copy on a known visual. When you render the variants for the user, every preview MUST display the source ad's real image. Empty image placeholders read as a broken feature.
 
-If the user is rotating multiple source ads at once, treat each ad's variants as its own pack — variants for ad A use ad A's image, variants for ad B use ad B's image.
+If the user is rotating multiple source ads at once (still within the 1–3 cap), treat each ad's variants as its own pack — variants for ad A use ad A's image, variants for ad B use ad B's image.
 
 ## 1. Core Principle
 
