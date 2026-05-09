@@ -2,8 +2,23 @@
 name: copy-rotation
 description: "Generates Meta ad copy matched to the visual and to the account's proven winners — each variant hits a different psychological angle, reinforces the image instead of repeating it, and respects proven length/opener/closer specs."
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
+
+## 0. Source Ad(s) — fetch image(s) first
+
+Copy rotation always generates variants for ONE OR MORE specific source ads (the ones being rotated), not for an abstract "ad idea". Before §1 and §2:
+
+1. **Identify the source ad(s)** the user wants rotated. Common sources:
+   - An ad the user named (`/copy-rotation @AdX`)
+   - The fatigued ads surfaced by a recent `/fatigue-detector` run
+   - A specific winner the agent or user surfaced from §2's audit
+2. **For each source ad, fetch its creative image** via the channel sub-agent. For Meta, call `meta-ads-agent` → `get_ad_images` and capture both:
+   - `imageUrl` — the https URL of the creative
+   - `imageHash` — Meta's `AdImage.hash`; the chat backend persists the image as an Asset keyed by this hash so previews survive Meta's signed-URL expiration
+3. **Bind variants to source ad**: every variant in §6 inherits the SAME source ad's image — the whole point of rotation is to swap copy on a known visual. When you call `previewMetaAds` (per the orchestrator's mandatory render rule), every preview MUST include the source ad's `imageUrl` AND `imageHash`. Omitting them renders the preview as empty placeholders, which the user perceives as a broken feature.
+
+If the user is rotating multiple source ads at once, treat each ad's variants as its own pack — variants for ad A use ad A's `imageUrl`, variants for ad B use ad B's `imageUrl`.
 
 ## 1. Core Principle
 
