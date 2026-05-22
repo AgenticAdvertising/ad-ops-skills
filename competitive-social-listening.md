@@ -94,10 +94,10 @@ Each pattern maps to a specific competitive move:
 
 | Theme pattern                                                    | Competitive move                                                                                                                                              |
 | :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **High‑volume Complaint on a specific friction**                 | **Angle hook** — lift the complaint **verbatim** (*"Still waiting 40s for [Target]'s dashboard?"*). Audience: `Interest: [Target]`.                            |
-| **Recurring Switcher pattern** (*"left X because Y"*)            | **Switcher creative** — quote the exit reason. CTA: *"Make the switch."* Audience: lookalike of users engaging with your versus ads.                          |
-| **Gap cluster** (repeated feature requests)                      | **"Finally, X can Y"** positioning — attack the gap. Brief via [creative-brief](creative-brief.md) pairing Gap + Direct Problem angles.                       |
-| **Price backlash**                                               | **Value/price creative** — contrast pricing or bundle. Only run if your pricing is *actually* competitive — don't bluff.                                       |
+| **High‑volume Complaint on a specific friction**                 | **Problem callout ads** — lift the complaint **verbatim** (*"Still waiting 40s for [Target]'s dashboard?"*). Audience: `Interest: [Target]`. Name the campaign after the friction (e.g. *"Slow reporting callout ads"*). |
+| **Recurring Switcher pattern** (*"left X because Y"*)            | **Ex‑[Target] switcher ads** — quote the exit reason. CTA: *"Make the switch."* Audience: lookalike of users engaging with your versus ads. Name the campaign *"Ex‑[Target] switcher ads"*.                          |
+| **Gap cluster** (repeated feature requests)                      | **Feature gap ads** — attack the missing capability head‑on (*"Finally, [feature] out of the box."*). Brief via [creative-brief](creative-brief.md). Name the campaign after the missing feature (e.g. *"CAPI gap ads"*). |
+| **Price backlash**                                               | **Pricing comparison ads** — contrast pricing or bundle. Only run if your pricing is *actually* competitive — don't bluff. Name the campaign *"Pricing comparison ads"*.                                                |
 | **Narrow Praise**                                                | **Defensive intel** — do *not* attack on this angle; pivot to complaint/gap themes instead.                                                                   |
 | **Comparisons that favor you**                                   | Lean in — the market is already saying it. Quote market language verbatim in the ad (beats brand‑written copy).                                               |
 | **Comparisons that favor a third alternative**                   | Watch closely — a rival is eating the angle you wanted. Escalate to positioning.                                                                              |
@@ -165,11 +165,11 @@ Each pattern maps to a specific competitive move:
 >
 > → **Move:** quote *"beat Competitor on reporting speed"* verbatim in a hook — market language beats brand copy.
 >
-> **This week's competitive plays**
+> **This week's competitive plays** *(use these names verbatim — direct, marketer‑natural, no jargon)*
 >
-> 1. **3 angle creatives** on the reporting‑speed complaint (priority — volume climbing).
-> 2. **1 switcher creative set** targeting ex‑Competitor customers via lookalikes.
-> 3. **1 gap creative** on server‑side CAPI.
-> 4. **Hold** on pricing until our pricing model is verified competitive.
+> 1. **Slow reporting callout ads** — 3 variants lifting the 40s‑load complaint (priority — volume climbing).
+> 2. **Ex‑Competitor switcher ads** — targeted at lookalikes of users engaging with our versus ads.
+> 3. **CAPI gap ads** — direct callout on missing server‑side conversions.
+> 4. **Hold** on pricing ads until our pricing is verified competitive.
 >
 > *4 unattributable quotes filtered (deleted comments / login‑walled reviews).*
