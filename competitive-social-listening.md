@@ -105,6 +105,12 @@ Each pattern maps to a specific competitive move:
 
 ## 7. Operational Output: Competitive Intel Report
 
+**Headline tone — plain, literal, no flourish.** The report's one‑line H1 should read like you're telling a colleague the gist in everyday language. Name the target by name and the top 1‑2 themes in plain words. Avoid editorial metaphors ("trust crisis", "performance debt", "bait‑and‑switch"), avoid ad‑ops jargon ("switcher window", "wedge", "opening", "narrative"), avoid abstractions. Save the storytelling for the lede.
+
+- ✅ *"Canva users are complaining about slow performance and paywall traps."*
+- ❌ *"Canva's performance debt and bait‑and‑switch paywalls are opening a switcher window."*
+
+
 > **Competitive Social Listening — Target: `Competitor` · Week of Apr 20 · 142 target‑relevant mentions (↑31%)**
 >
 > **Target sentiment distribution**
