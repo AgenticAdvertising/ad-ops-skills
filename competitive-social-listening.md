@@ -1,6 +1,6 @@
 ---
 name: competitive-social-listening
-description: "For challenger brands running paid ads against an incumbent — listens to what the market says about the COMPETITOR on Reddit, X, and G2, and turns their complaints, switcher threads, feature gaps, and price backlash into wedge hooks, switcher creatives, and audience targeting you can deploy this week."
+description: "For challenger brands running paid ads against an incumbent — listens to what the market says about the COMPETITOR on Reddit, X, and G2, and turns their complaints, switcher threads, feature gaps, and price backlash into ad angles, switcher creatives, and audience targeting you can deploy this week."
 metadata:
   version: 1.1.0
 ---
@@ -14,9 +14,9 @@ This skill is the **mirror** of [social-listening](social-listening.md) — same
 | **Subject**      | **Your** brand                                                   | A **competitor's** brand                                              |
 | **Used by**      | The brand itself                                                 | A challenger running ads *against* that competitor                    |
 | **Goal**         | Fix / defend your ads                                            | **Attack / exploit** the competitor                                   |
-| **Typical move** | Preempt objections, lift praise into your hooks                  | Lift competitor complaints into wedge hooks, target their switchers   |
+| **Typical move** | Preempt objections, lift praise into your hooks                  | Lift competitor complaints into ad angles, target their switchers     |
 
-Every complaint, switcher, feature gap, or price gripe a competitor's customer airs publicly is a wedge you can lift directly into a creative — in the competitor's own customers' language — and target at people shaped like them.
+Every complaint, switcher, feature gap, or price gripe a competitor's customer airs publicly is an angle you can lift directly into a creative — in the competitor's own customers' language — and target at people shaped like them.
 
 Run **weekly**, or on demand before briefing a competitor‑targeted campaign.
 
@@ -29,7 +29,7 @@ Every run answers two questions:
 
 - **Target brand** — the competitor being listened to (required; **one brand per run**).
 - **Subreddits, X handles, G2 page** scoped to the target.
-- **Your positioning** (from the platform's BrandKit) — so insights are filtered to wedges *you can credibly defend*, not every complaint uniformly.
+- **Your positioning** (from the platform's BrandKit) — so insights are filtered to angles *you can credibly defend*, not every complaint uniformly.
 
 ## 3. Sources & What to Pull
 
@@ -37,7 +37,7 @@ Same three surfaces as `social-listening`, but every query is scoped to the **ta
 
 | Source     | Pull                                                                                                                   | Competitive value                                                                             |
 | :--------- | :--------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
-| **Reddit** | Threads mentioning target · *"alternatives to [target]"* posts · 1‑star experiences · complaint threads in key subs    | Switcher threads and complaint posts — often the most candid wedge material.                  |
+| **Reddit** | Threads mentioning target · *"alternatives to [target]"* posts · 1‑star experiences · complaint threads in key subs    | Switcher threads and complaint posts — often the most candid angle material.                  |
 | **X**      | Target handle mentions · negative replies · *"just switched off [target]"* posts                                       | Speed — catches viral roasts, PR moments, founder gaffes.                                     |
 | **G2**     | 1–3 star reviews for target · *"What do you dislike?"* sections · *"Why did you switch?"* answers                      | Structured feature gaps and switcher reasoning — by role and company size.                    |
 
@@ -56,7 +56,7 @@ Edge case — neutral / off‑topic mentions: drop, don't classify. The threshol
 
 ## 5. Theme Clustering
 
-Group mentions into themes (≥ **3 mentions** = reportable). Themes still describe the *qualitative pattern* (a complaint about onboarding, a switcher cluster, a feature‑gap pile‑up, a price backlash) — that detail lives in the theme title, summary, and wedge note. The sentiment **mix** field collapses to positive / negative only.
+Group mentions into themes (≥ **3 mentions** = reportable). Themes still describe the *qualitative pattern* (a complaint about onboarding, a switcher cluster, a feature‑gap pile‑up, a price backlash) — that detail lives in the theme title, summary, and angle note. The sentiment **mix** field collapses to positive / negative only.
 
 Per theme:
 
@@ -65,7 +65,7 @@ Per theme:
 - **Verbatim quotes** — 3 per theme, one per platform when possible — **each must include full source attribution per §5.1**
 - **Volume trend** vs. prior period (↑ / ↓ / flat)
 - **Audience signal** — who's complaining (role, company size, industry if inferable from the post/review)
-- **Wedge note** — the specific competitive sub‑signal driving the theme (complaint / switcher / gap / price / comparison / praise) belongs here, in plain language, because that's what dictates the recommended move in §6.
+- **Angle note** — the specific competitive sub‑signal driving the theme (complaint / switcher / gap / price / comparison / praise) belongs here, in plain language, because that's what dictates the recommended move in §6.
 
 ### 5.1 Quote Source Attribution (Required)
 
@@ -94,18 +94,18 @@ Each pattern maps to a specific competitive move:
 
 | Theme pattern                                                    | Competitive move                                                                                                                                              |
 | :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **High‑volume Complaint on a specific friction**                 | **Wedge hook** — lift the complaint **verbatim** (*"Still waiting 40s for [Target]'s dashboard?"*). Audience: `Interest: [Target]`.                            |
+| **High‑volume Complaint on a specific friction**                 | **Angle hook** — lift the complaint **verbatim** (*"Still waiting 40s for [Target]'s dashboard?"*). Audience: `Interest: [Target]`.                            |
 | **Recurring Switcher pattern** (*"left X because Y"*)            | **Switcher creative** — quote the exit reason. CTA: *"Make the switch."* Audience: lookalike of users engaging with your versus ads.                          |
 | **Gap cluster** (repeated feature requests)                      | **"Finally, X can Y"** positioning — attack the gap. Brief via [creative-brief](creative-brief.md) pairing Gap + Direct Problem angles.                       |
 | **Price backlash**                                               | **Value/price creative** — contrast pricing or bundle. Only run if your pricing is *actually* competitive — don't bluff.                                       |
-| **Narrow Praise**                                                | **Defensive intel** — do *not* attack on this wedge; pivot to complaint/gap themes instead.                                                                   |
+| **Narrow Praise**                                                | **Defensive intel** — do *not* attack on this angle; pivot to complaint/gap themes instead.                                                                   |
 | **Comparisons that favor you**                                   | Lean in — the market is already saying it. Quote market language verbatim in the ad (beats brand‑written copy).                                               |
-| **Comparisons that favor a third alternative**                   | Watch closely — a rival is eating the wedge you wanted. Escalate to positioning.                                                                              |
+| **Comparisons that favor a third alternative**                   | Watch closely — a rival is eating the angle you wanted. Escalate to positioning.                                                                              |
 | **Negative sentiment spike ≥ +10pp WoW**                         | 🚀 **Budget moment** — scale competitor‑targeted ads for 7–14 days while the narrative is hot.                                                                |
 
 ## 7. Operational Output: Competitive Intel Report
 
-**Headline tone — plain, literal, no flourish.** The report's one‑line H1 should read like you're telling a colleague the gist in everyday language. Name the target by name and the top 1‑2 themes in plain words. Avoid editorial metaphors ("trust crisis", "performance debt", "bait‑and‑switch"), avoid ad‑ops jargon ("switcher window", "wedge", "opening", "narrative"), avoid abstractions. Save the storytelling for the lede.
+**Headline tone — plain, literal, no flourish.** The report's one‑line H1 should read like you're telling a colleague the gist in everyday language. Name the target by name and the top 1‑2 themes in plain words. Avoid editorial metaphors ("trust crisis", "performance debt", "bait‑and‑switch"), avoid ad‑ops jargon ("switcher window", "wedge", "angle", "opening", "narrative"), avoid abstractions. Save the storytelling for the lede.
 
 - ✅ *"Canva users are complaining about slow performance and paywall traps."*
 - ❌ *"Canva's performance debt and bait‑and‑switch paywalls are opening a switcher window."*
@@ -125,7 +125,7 @@ Each pattern maps to a specific competitive move:
 > | X      | 51       | 80%      | 20%      |
 > | G2     | 29       | 69%      | 31%      |
 >
-> **Top themes — competitive wedges**
+> **Top themes — competitive angles**
 >
 > **🔴 "Reporting takes forever to load" — 23 mentions (↑)** · 100% Negative · *complaint pattern*
 >
@@ -133,7 +133,7 @@ Each pattern maps to a specific competitive move:
 > - *"Competitor's dashboard feels like it's powered by a potato."* — `@adsec_pro` · [X ↗](https://x.com/adsec_pro/status/9876543210) · 2026‑04‑21 · 89 likes
 > - *"Their reporting speed is the single biggest reason I'm looking elsewhere."* — *Verified G2 reviewer (Marketing Manager · Mid‑Market)* · [G2 ↗](https://g2.com/products/competitor/reviews/r-7788) · 2026‑04‑15 · 2 stars
 >
-> → **Move:** **Wedge hook** — lift *"Still waiting 40 seconds for a campaign report?"* as a Direct Problem opener. Target `Interest: Competitor`. 3 variants via [creative-brief](creative-brief.md).
+> → **Move:** **Angle hook** — lift *"Still waiting 40 seconds for a campaign report?"* as a Direct Problem opener. Target `Interest: Competitor`. 3 variants via [creative-brief](creative-brief.md).
 >
 > **🔴 "Switched after 12+ months" — 9 mentions** · 100% Negative · *switcher pattern*
 >
@@ -158,7 +158,7 @@ Each pattern maps to a specific competitive move:
 >
 > **🟢 "Integrations are still the best" — 14 mentions (narrow praise)** · 100% Positive · *praise — strength to hold*
 >
-> → **Move:** **do not attack on integrations.** Pivot to speed/pricing/gap wedges instead.
+> → **Move:** **do not attack on integrations.** Pivot to speed/pricing/gap angles instead.
 >
 > **🟢 "Competitor vs. Us" — 6 mentions** · 67% Positive (in our favor) · *comparison pattern*
 >
@@ -166,11 +166,11 @@ Each pattern maps to a specific competitive move:
 >
 > → **Move:** quote *"beat Competitor on reporting speed"* verbatim in a hook — market language beats brand copy.
 >
-> **🚀 Spike alert:** Negative sentiment up **+9pp WoW**, reporting‑speed narrative heating up. Scale competitor‑targeted ads this week while the wedge is hot.
+> **🚀 Spike alert:** Negative sentiment up **+9pp WoW**, reporting‑speed narrative heating up. Scale competitor‑targeted ads this week while the angle is hot.
 >
 > **This week's competitive plays**
 >
-> 1. **3 wedge creatives** on the reporting‑speed complaint (priority — volume climbing).
+> 1. **3 angle creatives** on the reporting‑speed complaint (priority — volume climbing).
 > 2. **1 switcher creative set** targeting ex‑Competitor customers via lookalikes.
 > 3. **1 gap creative** on server‑side CAPI.
 > 4. **Hold** on pricing until our pricing model is verified competitive.
