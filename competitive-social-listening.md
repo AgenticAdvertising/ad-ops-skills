@@ -101,7 +101,6 @@ Each pattern maps to a specific competitive move:
 | **Narrow Praise**                                                | **Defensive intel** — do *not* attack on this angle; pivot to complaint/gap themes instead.                                                                   |
 | **Comparisons that favor you**                                   | Lean in — the market is already saying it. Quote market language verbatim in the ad (beats brand‑written copy).                                               |
 | **Comparisons that favor a third alternative**                   | Watch closely — a rival is eating the angle you wanted. Escalate to positioning.                                                                              |
-| **Negative sentiment spike ≥ +10pp WoW**                         | 🚀 **Budget moment** — scale competitor‑targeted ads for 7–14 days while the narrative is hot.                                                                |
 
 ## 7. Operational Output: Competitive Intel Report
 
@@ -165,8 +164,6 @@ Each pattern maps to a specific competitive move:
 > - *"We tried both — Adside beat Competitor on reporting speed hands down."* — *Verified G2 reviewer (Head of Performance · Agency)* · [G2 ↗](https://g2.com/products/adside/reviews/r-9012) · 2026‑04‑17 · 5 stars
 >
 > → **Move:** quote *"beat Competitor on reporting speed"* verbatim in a hook — market language beats brand copy.
->
-> **🚀 Spike alert:** Negative sentiment up **+9pp WoW**, reporting‑speed narrative heating up. Scale competitor‑targeted ads this week while the angle is hot.
 >
 > **This week's competitive plays**
 >
