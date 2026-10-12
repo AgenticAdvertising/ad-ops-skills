@@ -64,6 +64,12 @@ platform-reported.
 - **One range for every number.** Each count, row and ratio uses the report's
   date range. A figure from any other window (the comparison period, a longer
   look-back) says its window next to it.
+- **Count each thing by its own date.** Sessions are counted by the day they
+  started, conversions by the day they happened, both inside the range. Reading
+  sessions from the day before the range is only for joining a conversion to
+  its session; those extra sessions never enter a count. A conversion that has
+  no session in the join still counts in the funnel; it only drops out of the
+  per-channel split.
 - **Find the conversion first.** List the custom events (PostHog) and key
   events (GA4), order them into a funnel (landing → intermediate steps →
   the money event: purchase, paid, booked call, qualified lead). If two
@@ -102,14 +108,14 @@ last row.
 
 | Check | How | Problem when |
 | :--- | :--- | :--- |
-| **Event still fires** | Count by day for **every** funnel event, not only the final one | Any funnel event has a day at 0 between non-zero days, or is down > 50% vs the previous period while sessions held. An event too sparse to read by day (a few a week) says so |
+| **Event still fires** | Count by day for **every** funnel event, not only the final one, and list the dates at 0 | Any funnel event has a day at 0 between non-zero days: name the dates, and the row is a Problem even if the rest of the range looks normal ("almost daily" is not OK). Also a Problem: down > 50% vs the previous period while sessions held. An event too sparse to read by day (a few a week) says so |
 | **Marked as a key event** | GA4 events by `is_key_event` | The event exists but is `false` or `(not set)`. GA4, and Google Ads imports from it, count nothing |
-| **Double counting** | GA4 purchases by transaction id; PostHog conversions by sender (`lib`) | A transaction id counted more than once, or the same conversion sent by both `web` and a server library at similar daily volume |
+| **Double counting** | GA4 `purchase_by_transaction` rows with `event_count > 1` (GA4 reports a repeated id as one row with a count above 1, so counting distinct ids finds nothing); PostHog conversions by sender (`lib`) | Any transaction id with `event_count > 1`: give how many ids out of how many, or the same conversion sent by both `web` and a server library at similar daily volume |
 | **Attributable** | A sample of PostHog conversion rows | > 30% carry no session, no entry UTM and no click ID. Usually a server-side event sent under an id the browser never shared. Those conversions can't be tied to any ad |
 | **Click IDs survive** | For **each** paid channel, its sessions by its own click ID (Meta `fbclid`, Google `gclid`, LinkedIn `li_fat_id`, Microsoft `msclkid`, TikTok `ttclid`) | Under 80% of any paid channel's sessions carry that channel's click ID: a redirect or link shortener strips it. Give the share per channel |
 | **Clicks arrive** | Platform link clicks vs site sessions from that channel | Sessions under 60% of link clicks: slow page, broken link, or no analytics snippet on the landing page |
 | **Test traffic** | Events by host | Conversions on localhost, preview or staging hosts. Exclude them from every later step |
-| **Platform vs site** | Find which platform event each channel counts (its conversion mapping), match it to the site event that means the same thing, then compare counts from that channel | The platform claims > 2× the site's count for the **same** event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio. If the platform event has no site counterpart, or the counterpart can't be attributed, this row is **Can't tell**: comparing a platform "Lead" with site sign-ups when leads are demo bookings is not an overcount |
+| **Platform vs site** | Find which platform event each channel counts (its conversion mapping), match it to the site event that means the same thing, then compare counts from that channel. The match needs evidence: the mapping's label, the user's answer, or the pixel's configuration. An event name alone ("Lead") is not evidence | The platform claims > 2× the site's count for the **same** event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio. If the platform event has no site counterpart, or the counterpart can't be attributed, this row is **Can't tell**: comparing a platform "Lead" with site sign-ups when leads are demo bookings is not an overcount. Without evidence for the match, the row is also **Can't tell**; a ratio may be shown, labelled as an assumption |
 
 Later sections must not treat a broken count as real performance. If a lead
 pixel overcounts, that channel's cost per lead is wrong too.
@@ -122,7 +128,10 @@ the step-to-step rate and the rate from the first step.
 
 The per-channel funnel is one table with **every** entry channel as a row,
 unpaid ones included (organic search, direct, referrals, AI assistants), and
-it comes before any deep dive into a single channel. A channel with no spend
+it comes before any deep dive into a single channel. A row is one ad platform
+or source (UTM source, or click-ID type when the UTM is missing), never a
+grouped channel type: PostHog's `channel_type` "Paid Social" mixes Meta,
+LinkedIn and TikTok, and hides each one's numbers. A channel with no spend
 data still gets its row: its conversion rate shows who converts, even when
 its cost can't be computed.
 
@@ -217,7 +226,9 @@ possible. Don't add sections or relabel them (no priority tiers):
 6. **Stop**: each candidate with the spend it would have saved.
 7. **Retarget**: each pool with its size and the audience to build.
 8. **What to fix next**: up to five actions, ordered by money at stake.
-   Tracking fixes come first when any check failed.
+   Tracking fixes come first when any check failed. Exclusions or budget moves
+   on a channel held for **Tracking** come after its measurement fix, marked
+   as waiting on it.
 9. **Limits**: what the data could not show, and what would close the gap.
 
 Exact counts; currency in the account currency; rates as percentages with one
@@ -242,12 +253,12 @@ Illustrative numbers.
 > | :--- | :--- |
 > | Event still fires | OK: `signup` every day (6–23 a day), `onboarding_done` every day (2–14); `paid` too sparse (32) to read by day |
 > | Marked as a key event | Problem: `book_call` is not a GA4 key event |
-> | Double counting | OK: one sender per event, no repeated transaction ids |
+> | Double counting | OK: one sender per event; 0 of 32 transaction ids with `event_count` above 1 |
 > | Attributable | Problem: 100% of 63 `book_call` events are server-only with no session |
 > | Click IDs survive | OK: Meta 93% `fbclid`; Google Search 97% and Display 95% `gclid` |
 > | Clicks arrive | OK: 71% of Meta link clicks became sessions |
 > | Test traffic | Problem: 37 sign-ups on a staging host, excluded below |
-> | Platform vs site | Can't tell: Meta's mapped event is `lead` (counted alone, 164), which is the booking, and bookings can't be attributed |
+> | Platform vs site | Can't tell: Meta's mapped event is `lead` (counted alone, 164), labelled "Demo booked" in the mapping, and bookings can't be attributed |
 >
 > **Funnel (whole site)**: 9,812 sessions → 442 `signup` (4.5%) →
 > 224 `onboarding_done` (50.7%) → 32 `paid` (14.3%). Biggest loss and weakest
