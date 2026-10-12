@@ -64,6 +64,11 @@ platform-reported.
 - **One range for every number.** Each count, row and ratio uses the report's
   date range. A figure from any other window (the comparison period, a longer
   look-back) says its window next to it.
+- **Query fresh on every run.** Recompute every figure from new queries, even
+  when memory or an earlier conversation holds a previous audit: imports
+  restate recent days, and an earlier run may have been wrong. Never re-deliver
+  an earlier report. Don't save the audit's figures to memory; save at most the
+  date it ran and the fixes still open.
 - **Count each thing by its own date.** Sessions are counted by the day they
   started, conversions by the day they happened, both inside the range. Reading
   sessions from the day before the range is only for joining a conversion to
@@ -80,7 +85,11 @@ platform-reported.
   sign-up campaign is judged on sign-ups. When a campaign's own conversion
   can't be attributed (see §4), its verdict is **Can't tell**. Never fill
   the gap with a different event: a demo page will always look bad on
-  sign-ups.
+  sign-ups. Site evidence that doesn't depend on the conversion (bounce,
+  pages per session, clicks arriving) can still be reported. A campaign
+  measured on another event than its objective's (sign-ups for a lead
+  campaign) never gets **Working** or a double-down; say "on site sign-ups,
+  N" instead.
 - **Count a platform conversion by its mapped event only.** Use the action
   type from the channel's conversion mapping and nothing else. Meta's
   `actions` lists `lead` next to the parts it already includes
@@ -112,10 +121,10 @@ last row.
 | **Marked as a key event** | GA4 events by `is_key_event` | The event exists but is `false` or `(not set)`. GA4, and Google Ads imports from it, count nothing |
 | **Double counting** | GA4 `purchase_by_transaction` rows with `event_count > 1` (GA4 reports a repeated id as one row with a count above 1, so counting distinct ids finds nothing); PostHog conversions by sender (`lib`) | Any transaction id with `event_count > 1`: give how many ids out of how many, or the same conversion sent by both `web` and a server library at similar daily volume |
 | **Attributable** | A sample of PostHog conversion rows | > 30% carry no session, no entry UTM and no click ID. Usually a server-side event sent under an id the browser never shared. Those conversions can't be tied to any ad |
-| **Click IDs survive** | For **each** paid channel, its sessions by its own click ID (Meta `fbclid`, Google `gclid`, LinkedIn `li_fat_id`, Microsoft `msclkid`, TikTok `ttclid`) | Under 80% of any paid channel's sessions carry that channel's click ID: a redirect or link shortener strips it. Give the share per channel |
+| **Click IDs survive** | For **each** paid channel, its sessions by its own click ID (Meta `fbclid`, Google `gclid`, LinkedIn `li_fat_id`, Microsoft `msclkid`, TikTok `ttclid`). A channel is paid when its UTM medium (`cpc`, `ppc`, `paid_*`) or a click ID says so, whether or not its ad account is connected here | Under 80% of any paid channel's sessions carry that channel's click ID: a redirect or link shortener strips it. Give the share per channel |
 | **Clicks arrive** | Platform link clicks vs site sessions from that channel | Sessions under 60% of link clicks: slow page, broken link, or no analytics snippet on the landing page |
 | **Test traffic** | Events by host | Conversions on localhost, preview or staging hosts. Exclude them from every later step |
-| **Platform vs site** | Find which platform event each channel counts (its conversion mapping), match it to the site event that means the same thing, then compare counts from that channel. The match needs evidence: the mapping's label, the user's answer, or the pixel's configuration. An event name alone ("Lead") is not evidence | The platform claims > 2× the site's count for the **same** event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio. If the platform event has no site counterpart, or the counterpart can't be attributed, this row is **Can't tell**: comparing a platform "Lead" with site sign-ups when leads are demo bookings is not an overcount. Without evidence for the match, the row is also **Can't tell**; a ratio may be shown, labelled as an assumption |
+| **Platform vs site** | Find which platform event each channel counts (its conversion mapping), match it to the site event that means the same thing, then compare counts from that channel. The match needs evidence: the mapping's label, the user's answer, or the pixel's configuration. An event name alone ("Lead") is not evidence | The platform claims > 2× the site's count for the **same** event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio. If the platform event has no site counterpart, or the counterpart can't be attributed, this row is **Can't tell**: comparing a platform "Lead" with site sign-ups when leads are demo bookings is not an overcount. Without evidence for the match, the row is also **Can't tell**; a ratio may be shown, labelled as an assumption. The headline, diagnosis and fix list then follow the row: the ratio stays an assumption there too, never "an overcount" |
 
 Later sections must not treat a broken count as real performance. If a lead
 pixel overcounts, that channel's cost per lead is wrong too.
@@ -191,11 +200,13 @@ convert; audiences that click and bounce. Give the spend each would have saved
 over the range. If §6 said **Tracking**, say "fix the measurement first"
 instead: pausing on a broken count kills a campaign that may be working.
 
-Before saying that nothing qualifies, check the platform's breakdowns (age,
-gender, country or region, placement, device) for segments that take spend
-with no platform conversions. The site can't see these segments, so label
-them platform-reported. When the channel is held for **Tracking**, still list
-them, as candidates to recheck once the count is fixed.
+Before saying that nothing qualifies, go through **every** breakdown the
+platform reports (age, gender, country or region, placement, device), not
+only the first one. List each segment that takes spend with no platform
+conversions, with its spend, and say which breakdowns were not available.
+The site can't see these segments, so label them platform-reported. When
+the channel is held for **Tracking**, still list them, as candidates to
+recheck once the count is fixed.
 
 **Retarget.** Estimate each pool from the whole site's counts, not one
 channel's (aggregates, so present them as estimates), then say which platform
@@ -286,7 +297,8 @@ Illustrative numbers.
 >
 > **Stop**: Google Display, $1,960 over 30 days with 0 sign-ups. Meta is held
 > until bookings are measurable; recheck then its 55+ age band ($1,120, 0
-> platform leads, platform-reported).
+> platform leads, platform-reported). Country and placement breakdowns: no
+> zero-lead segment; device breakdown not available.
 >
 > **Retarget**: about 218 people signed up but did not finish onboarding.
 > Build a website custom audience on `/onboarding` visitors, excluding `/paid`.
