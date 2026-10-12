@@ -58,6 +58,17 @@ platform-reported.
   the money event: purchase, paid, booked call, qualified lead). If two
   events could be the final conversion, ask the user which one counts. Note
   any ad channel optimising toward a different event than that one.
+- **Judge each campaign by the conversion it is built for.** A lead or demo
+  campaign landing on a booking page is judged on bookings, not sign-ups. A
+  sign-up campaign is judged on sign-ups. When a campaign's own conversion
+  can't be attributed (see §4), its verdict is **Can't tell**. Never fill
+  the gap with a different event: a demo page will always look bad on
+  sign-ups.
+- **Every number in the answer is computed, not estimated.** Recompute
+  ratios and "N× better" from the table before writing them, and quote each
+  pair separately rather than as a range that doesn't hold. A statement the
+  data didn't show (an audience's retention window, what a pixel fires on)
+  is labelled as an assumption to check.
 - **No personal data in the answer.** Counts and click-ID presence only:
   never a person, an email or a full URL.
 - **Read-only.** This skill recommends. Pausing, excluding an audience or
@@ -66,8 +77,11 @@ platform-reported.
 
 ## 4. Counting Health
 
-Run every check. Report each as **OK**, **Problem** or **Can't tell**, with
-the numbers.
+Run every check below and list all eight rows, even when a check could not
+run (then it is **Can't tell**, with the reason). Report each as **OK**,
+**Problem** or **Can't tell**, with the numbers. The checks are about the
+site's own conversion events; the ad platform's pixel is covered only by the
+last row.
 
 | Check | How | Problem when |
 | :--- | :--- | :--- |
@@ -78,7 +92,7 @@ the numbers.
 | **Click IDs survive** | Sessions by entry UTM source and click-ID type | Under 80% of sessions tagged as a paid channel carry that channel's click ID: a redirect or link shortener strips it |
 | **Clicks arrive** | Platform link clicks vs site sessions from that channel | Sessions under 60% of link clicks: slow page, broken link, or no analytics snippet on the landing page |
 | **Test traffic** | Events by host | Conversions on localhost, preview or staging hosts. Exclude them from every later step |
-| **Platform vs site** | Platform-reported conversions vs site conversions from the same channel | The platform claims > 2× the site's count for the same event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio |
+| **Platform vs site** | Find which platform event each channel counts (its conversion mapping), match it to the site event that means the same thing, then compare counts from that channel | The platform claims > 2× the site's count for the **same** event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio. If the platform event has no site counterpart, or the counterpart can't be attributed, this row is **Can't tell**: comparing a platform "Lead" with site sign-ups when leads are demo bookings is not an overcount |
 
 Later sections must not treat a broken count as real performance. If a lead
 pixel overcounts, that channel's cost per lead is wrong too.
@@ -90,7 +104,8 @@ bounces) at the top, then each funnel event. For each step show the count,
 the step-to-step rate and the rate from the first step.
 
 The **biggest drop-off** is the step that loses the most visitors in absolute
-terms, not the lowest rate. Say both when they differ.
+terms. The **weakest step** is the one with the lowest step-to-step rate.
+Name both when they differ, and compute both from the table.
 
 Split the worst step by **channel** (entry channel, UTM source, click-ID
 type), **landing page** (GA4 key events by page; PostHog conversion page)
@@ -109,7 +124,7 @@ either of the others.
 | **Tracking** | Any §4 Problem that touches this channel, or conversions stopped on a date while sessions did not |
 | **Traffic quality / audience** (ad side) | Platform clicks are healthy, but sessions bounce > 85%, average under 1.2 pages, or come from a device or country the product doesn't serve. Other channels landing on the same page convert |
 | **Ad-to-page mismatch** (ad side) | Visitors engage (2+ pages), but the ad promises something the page doesn't lead to: a demo-led ad on a self-serve sign-up page, an offer the page doesn't show |
-| **Landing page** | The same page converts badly for every channel, or much worse than another page getting the same traffic |
+| **Landing page** | The same page converts badly for every channel, or much worse than another page getting the **same kind of traffic**. Cold prospecting and retargeting are not the same traffic: retargeting converts better on any page. When page and audience change together, the verdict is "page or audience, can't separate", and the next step is to split cold traffic between the two pages |
 | **Ad** (creative / targeting) | Low CTR or high CPC against the account's own other campaigns, before anyone reaches the site |
 | **Working** | Conversion rate from the channel's sessions at or above the site average, with enough volume |
 
@@ -183,10 +198,12 @@ Illustrative numbers.
 
 > **Funnel audit — Sep 10 to Oct 9 (30 days, vs the 30 before)**
 >
-> **Headline:** Paid social drives 61% of sessions but 2% of sign-ups. Its
-> visitors are 95% mobile, land on the demo page and leave. Meta's lead count
-> (164) is 4× what the site recorded from Meta (41), so its $96 cost per lead
-> is really about $384.
+> **Headline:** Meta's demo campaigns ($9,400, 47% of spend) can't be judged
+> yet: `book_call` reaches PostHog with no session, so no booking ties to an
+> ad, and Meta's 164 "Lead" count can't be checked. On sign-ups, Google Search
+> works ($41 per sign-up) and Google Display doesn't (0 sign-ups from 1,380
+> sessions, $1,960). The change with the most money behind it is making
+> bookings attributable.
 >
 > **Counting health**
 >
@@ -194,32 +211,42 @@ Illustrative numbers.
 > | :--- | :--- |
 > | Event still fires | OK: `signup` every day, 18–41 a day |
 > | Marked as a key event | Problem: `book_call` is not a GA4 key event |
-> | Double counting | OK |
-> | Attributable | Problem: 100% of `book_call` events are server-only with no session |
-> | Platform vs site | Problem: Meta 164 leads vs 41 site bookings from Meta (4.0×) |
+> | Double counting | OK: one sender per event, no repeated transaction ids |
+> | Attributable | Problem: 100% of 63 `book_call` events are server-only with no session |
+> | Click IDs survive | OK: 93% of Meta-tagged sessions carry an fbclid |
+> | Clicks arrive | OK: 71% of Meta link clicks became sessions |
+> | Test traffic | Problem: 37 sign-ups on a staging host, excluded below |
+> | Platform vs site | Can't tell: Meta's "Lead" is the booking, and bookings can't be attributed |
 >
 > **Funnel (whole site)**: 9,812 sessions → 1,204 `signup` (12.3%) →
-> 611 `onboarding_done` (50.7%) → 88 `paid` (14.4%). Biggest loss:
-> sign-up → onboarding, 593 people.
+> 611 `onboarding_done` (50.7%) → 88 `paid` (14.4%). Biggest loss and weakest
+> step: session → sign-up (8,608 lost, 12.3%). After sign-up, onboarding loses
+> the most people (593).
 >
 > **Diagnosis**
 >
-> - Meta: **Tracking**, then traffic quality. Fix the booking event first.
->   86% single-page sessions, 95% mobile.
-> - Google Search: **Working**. 9.8% session → sign-up, $41 site cost per
+> - Meta (demo campaigns): **Can't tell.** Their conversion is the booking,
+>   which can't be attributed. Clicks do reach the page (71%). Its 86% bounce
+>   rate may be normal for a booking page; judge it after the fix.
+> - Google Search: **Working.** 9.8% session → sign-up, 212 sign-ups, $41 per
 >   sign-up.
+> - Google Display: **Traffic quality.** 1,380 sessions, 94% bounce,
+>   0 sign-ups, while Search traffic to the same page converts.
 >
-> **Stop**: Meta Audience Network placement, $2,140 spent, 0 site conversions.
+> **Stop**: Google Display, $1,960 over 30 days with 0 sign-ups. Meta is held
+> until bookings are measurable.
 >
-> **Retarget**: about 590 people signed up but did not finish onboarding.
+> **Retarget**: about 593 people signed up but did not finish onboarding.
 > Build a website custom audience on `/onboarding` visitors, excluding `/paid`.
 >
 > **What to fix next**
 >
 > 1. Send `book_call` with the visitor's analytics id so bookings can be
 >    attributed, and mark it as a GA4 key event.
-> 2. Move Meta's lead pixel from form start to the booking confirmation page.
-> 3. Exclude Audience Network on Meta ($2,140 over 30 days with no conversions).
+> 2. Check that Meta's "Lead" fires on the booking confirmation, not on form
+>    start (an assumption until checked in Events Manager).
+> 3. Exclude the Google Display network ($1,960 over 30 days, no sign-ups).
+> 4. Keep the staging host out of the production analytics project.
 >
 > **Limits**: device split comes from Meta's breakdown; the site data has no
 > device field.
