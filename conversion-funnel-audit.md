@@ -28,8 +28,16 @@ sign-up, 60 days" is.
 | Site events, key events, purchases by traffic source and page | GA4 | `query_conversion_capture` with `source: "ga4"` (reports `event_by_traffic`, `key_event_by_page`, `purchase_by_transaction`) |
 | Sessions by entry source and click ID; conversions by sender, host and page; a sample of conversion rows | PostHog | `query_conversion_capture` with `source: "posthog"` (reports `event_by_traffic`, `sessions_by_entry`, `conversions`, `conversion_events`) |
 | Spend, clicks, CTR, CPC by channel, campaign and ad | Ad platforms | `query_ad_performance` |
-| Platform-reported conversions, and the event each channel optimises toward | Ad platforms | `reporting_conversions`, `get_channel_conversion_mappings` |
-| Audience breakdowns (age, gender, placement, region, device) | Ad platforms | `reporting_query` type `demographics`, or the platform's insights breakdowns |
+| Platform-reported conversions | Ad platforms | `query_ad_performance` at level `ad` (`conversions`, `costPerConversion`) |
+| The event each channel counts as its conversion | Ad platforms | `get_channel_conversion_mappings` |
+| Audience breakdowns (age, gender, placement, region, device) | Ad platforms | The platform's insights breakdowns (Meta: `reporting.meta_ads_insights_age_and_gender`, `reporting.meta_ads_insights_country`) |
+
+When a tool above is not available, read the same data from the reporting
+warehouse: call `get_query_guide` once, then `query_reporting` on
+`reporting.ga4_event_daily`, `reporting.posthog_*` and `reporting.meta_*`.
+Without `get_channel_conversion_mappings`, ask the user which platform event
+each channel counts; until they answer, every row that depends on it is
+**Can't tell**.
 
 GA4 or PostHog is required. With neither connected, stop: say what to
 connect, and offer the ad-platform-only parts of §6–§8, labelled as
@@ -53,6 +61,9 @@ platform-reported.
   the user asks about today.
 - **Default range:** the last 30 days (60 if the account spends under $3,000
   a month), compared with the period just before it.
+- **One range for every number.** Each count, row and ratio uses the report's
+  date range. A figure from any other window (the comparison period, a longer
+  look-back) says its window next to it.
 - **Find the conversion first.** List the custom events (PostHog) and key
   events (GA4), order them into a funnel (landing → intermediate steps →
   the money event: purchase, paid, booked call, qualified lead). If two
@@ -64,6 +75,12 @@ platform-reported.
   can't be attributed (see §4), its verdict is **Can't tell**. Never fill
   the gap with a different event: a demo page will always look bad on
   sign-ups.
+- **Count a platform conversion by its mapped event only.** Use the action
+  type from the channel's conversion mapping and nothing else. Meta's
+  `actions` lists `lead` next to the parts it already includes
+  (`offsite_conversion.fb_pixel_lead`, `onsite_conversion.lead_grouped`), and
+  `purchase` next to `offsite_conversion.fb_pixel_purchase`. Adding them
+  together counts each conversion twice.
 - **Every number in the answer is computed, not estimated.** Recompute
   ratios and "N× better" from the table before writing them, and quote each
   pair separately rather than as a range that doesn't hold. A statement the
@@ -85,11 +102,11 @@ last row.
 
 | Check | How | Problem when |
 | :--- | :--- | :--- |
-| **Event still fires** | Conversion count by day | A day at 0 between non-zero days, or down > 50% vs the previous period while sessions held |
+| **Event still fires** | Count by day for **every** funnel event, not only the final one | Any funnel event has a day at 0 between non-zero days, or is down > 50% vs the previous period while sessions held. An event too sparse to read by day (a few a week) says so |
 | **Marked as a key event** | GA4 events by `is_key_event` | The event exists but is `false` or `(not set)`. GA4, and Google Ads imports from it, count nothing |
 | **Double counting** | GA4 purchases by transaction id; PostHog conversions by sender (`lib`) | A transaction id counted more than once, or the same conversion sent by both `web` and a server library at similar daily volume |
 | **Attributable** | A sample of PostHog conversion rows | > 30% carry no session, no entry UTM and no click ID. Usually a server-side event sent under an id the browser never shared. Those conversions can't be tied to any ad |
-| **Click IDs survive** | Sessions by entry UTM source and click-ID type | Under 80% of sessions tagged as a paid channel carry that channel's click ID: a redirect or link shortener strips it |
+| **Click IDs survive** | For **each** paid channel, its sessions by its own click ID (Meta `fbclid`, Google `gclid`, LinkedIn `li_fat_id`, Microsoft `msclkid`, TikTok `ttclid`) | Under 80% of any paid channel's sessions carry that channel's click ID: a redirect or link shortener strips it. Give the share per channel |
 | **Clicks arrive** | Platform link clicks vs site sessions from that channel | Sessions under 60% of link clicks: slow page, broken link, or no analytics snippet on the landing page |
 | **Test traffic** | Events by host | Conversions on localhost, preview or staging hosts. Exclude them from every later step |
 | **Platform vs site** | Find which platform event each channel counts (its conversion mapping), match it to the site event that means the same thing, then compare counts from that channel | The platform claims > 2× the site's count for the **same** event. Check that the pixel fires on the final step (not on page view or form start) and how much is view-through. Name the ratio. If the platform event has no site counterpart, or the counterpart can't be attributed, this row is **Can't tell**: comparing a platform "Lead" with site sign-ups when leads are demo bookings is not an overcount |
@@ -102,6 +119,12 @@ pixel overcounts, that channel's cost per lead is wrong too.
 Build the funnel for the whole site, then per channel: sessions (with
 bounces) at the top, then each funnel event. For each step show the count,
 the step-to-step rate and the rate from the first step.
+
+The per-channel funnel is one table with **every** entry channel as a row,
+unpaid ones included (organic search, direct, referrals, AI assistants), and
+it comes before any deep dive into a single channel. A channel with no spend
+data still gets its row: its conversion rate shows who converts, even when
+its cost can't be computed.
 
 The **biggest drop-off** is the step that loses the most visitors in absolute
 terms. The **weakest step** is the one with the lowest step-to-step rate.
@@ -159,9 +182,15 @@ convert; audiences that click and bounce. Give the spend each would have saved
 over the range. If §6 said **Tracking**, say "fix the measurement first"
 instead: pausing on a broken count kills a campaign that may be working.
 
-**Retarget.** Estimate each pool from the counts (aggregates, so present them
-as estimates), then recommend the platform audience that reaches it (a
-website custom audience by URL or event):
+Before saying that nothing qualifies, check the platform's breakdowns (age,
+gender, country or region, placement, device) for segments that take spend
+with no platform conversions. The site can't see these segments, so label
+them platform-reported. When the channel is held for **Tracking**, still list
+them, as candidates to recheck once the count is fixed.
+
+**Retarget.** Estimate each pool from the whole site's counts, not one
+channel's (aggregates, so present them as estimates), then say which platform
+audience reaches it (a website custom audience by URL or event):
 
 | Pool | Estimated size | Message |
 | :--- | :--- | :--- |
@@ -175,12 +204,14 @@ many there are.
 
 ## 9. Operational Output: Funnel Audit
 
-Sections in this order, under one screen where possible:
+Sections in this order and with these names, under one screen where
+possible. Don't add sections or relabel them (no priority tiers):
 
 1. **Headline**: three sentences. The biggest drop-off, its most likely cause,
    and the change with the most money behind it.
-2. **Counting health**: the §4 table.
-3. **Funnel**: step counts and rates, whole site, worst channel beside best.
+2. **Counting health**: the §4 table, all eight rows.
+3. **Funnel**: step counts and rates for the whole site, then the §5 table
+   with every entry channel.
 4. **Diagnosis**: per channel, the §6 verdict and its evidence.
 5. **Scale**: the §7 ranking, top rows only.
 6. **Stop**: each candidate with the spend it would have saved.
@@ -209,19 +240,28 @@ Illustrative numbers.
 >
 > | Check | Result |
 > | :--- | :--- |
-> | Event still fires | OK: `signup` every day, 18–41 a day |
+> | Event still fires | OK: `signup` every day (6–23 a day), `onboarding_done` every day (2–14); `paid` too sparse (32) to read by day |
 > | Marked as a key event | Problem: `book_call` is not a GA4 key event |
 > | Double counting | OK: one sender per event, no repeated transaction ids |
 > | Attributable | Problem: 100% of 63 `book_call` events are server-only with no session |
-> | Click IDs survive | OK: 93% of Meta-tagged sessions carry an fbclid |
+> | Click IDs survive | OK: Meta 93% `fbclid`; Google Search 97% and Display 95% `gclid` |
 > | Clicks arrive | OK: 71% of Meta link clicks became sessions |
 > | Test traffic | Problem: 37 sign-ups on a staging host, excluded below |
-> | Platform vs site | Can't tell: Meta's "Lead" is the booking, and bookings can't be attributed |
+> | Platform vs site | Can't tell: Meta's mapped event is `lead` (counted alone, 164), which is the booking, and bookings can't be attributed |
 >
-> **Funnel (whole site)**: 9,812 sessions → 1,204 `signup` (12.3%) →
-> 611 `onboarding_done` (50.7%) → 88 `paid` (14.4%). Biggest loss and weakest
-> step: session → sign-up (8,608 lost, 12.3%). After sign-up, onboarding loses
-> the most people (593).
+> **Funnel (whole site)**: 9,812 sessions → 442 `signup` (4.5%) →
+> 224 `onboarding_done` (50.7%) → 32 `paid` (14.3%). Biggest loss and weakest
+> step: session → sign-up (9,370 lost, 4.5%). After sign-up, onboarding loses
+> the most people (218).
+>
+> | Channel | Sessions | Bounce | Sign-ups | Session → sign-up |
+> | :--- | ---: | ---: | ---: | ---: |
+> | Meta | 4,210 | 86% | 38 | 0.9% |
+> | Google Search | 2,163 | 41% | 212 | 9.8% |
+> | Google Display | 1,380 | 94% | 0 | 0.0% |
+> | Organic search | 1,240 | 55% | 104 | 8.4% |
+> | Direct | 601 | 44% | 57 | 9.5% |
+> | ChatGPT (referral) | 218 | 30% | 31 | 14.2% |
 >
 > **Diagnosis**
 >
@@ -234,9 +274,10 @@ Illustrative numbers.
 >   0 sign-ups, while Search traffic to the same page converts.
 >
 > **Stop**: Google Display, $1,960 over 30 days with 0 sign-ups. Meta is held
-> until bookings are measurable.
+> until bookings are measurable; recheck then its 55+ age band ($1,120, 0
+> platform leads, platform-reported).
 >
-> **Retarget**: about 593 people signed up but did not finish onboarding.
+> **Retarget**: about 218 people signed up but did not finish onboarding.
 > Build a website custom audience on `/onboarding` visitors, excluding `/paid`.
 >
 > **What to fix next**
